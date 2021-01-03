@@ -95,6 +95,9 @@ begin
                  end
   annotations = generate_annotations(compare_sha: previous_sha)
 rescue Exception => e
+  p JSON.parse(
+    File.read(ENV["GITHUB_EVENT_PATH"])
+  )
   puts e.message
   puts e.backtrace.inspect
   resp = check_run.error(message: e.message)
